@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+ <title>Simple To Do List Generator by LordGnomeMBE</title>
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☑️</text></svg>">
+
+ <style>
+ @page {
+    margin: 0;
+}
+ .badge {
+  cursor: pointer;
+ }
+ 
+ li {
+ list-style-type: none
+ }
+ 
+ .list-group {
+   border: 2px solid black;
+   width: 50%;
+   padding-top: 15px;
+   padding-bottom: 15px;
+   padding-left: 15px;
+   padding-right: 15px;
+overflow-wrap: break-word;
+margin: 15%;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+ .list-title {
+   font-size: 25px;
+ }
+ .form-control {
+   margin-left: 15%;
+   width: 30%;
+ }
+  .tips {
+   width: 50%;
+   padding-top: 15px;
+   padding-bottom: 15px;
+   padding-left: 15px;
+   padding-right: 15px;
+overflow-wrap: break-word;
+margin: 15%;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+@media print{
+   .noprint{
+       display:none;
+   }
+}
+</style>
+</head>
+<body>
+<h2 style="font-size: 30px; margin-left: 15%;" class="noprint">Simple To Do List Generator</h2>
+    <div class="container">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <!-- List group -->
+            <ul id="list" class="list-group">
+            <p1 class="list-title">To Do List</p1>
+                <li class="list-group-item"><span class="badge">☐ </span>Art Work</li>
+                <li class="list-group-item"><span class="badge">☐ </span>English Work</li>
+                <li class="list-group-item"><span class="badge">☐ </span>Maths Work</li>
+                <li class="list-group-item"><span class="badge">☐ </span>Organ Practise</li>
+            </ul>
+        </div>
+        <!-- text input & button -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">	<span class="input-group-btn">
+					
+				</span>
+
+                    <input id="input" type="text" class="form-control noprint"  placeholder="Add another task..."> <button id="addButton" class="btn btn-default noprint" type="button">Add</button> <button onclick="window.print()" class="noprint">Print Tasks</button>
+                </div>
+                
+                <!-- end input group -->
+            </div>
+            
+            <!-- end col-lg-6 -->
+        </div>
+        <!-- end row -->
+        <br>
+    </div>
+<div class="tips" >
+        <p1 class="list-title noprint">Tips</p1>
+        <p class="noprint">1. Click the box to dismiss the task</br>2. Use the enter key while the input box is selected to quickly add a task!</p>
+</div>
+    
+</body>
+
+<script>
+$(document).ready(function () {
+    //add item if the button is clicked
+    $('#addButton').click(function () {
+        $('<li class="list-group-item"><span class="badge">☐ </span>' + $('#input').val() + '</li>').appendTo('#list');
+        $('#input').val(null);
+    });
+
+    //add item if the enter key is pressed
+    $('#input').bind("enterKey", function (e) {
+        $('<li class="list-group-item"><span class="badge">☐ </span>' + $('#input').val() + '</li>').appendTo('#list');
+        $('#input').val(null);
+    });
+
+    $('#input').keyup(function (e) {
+        if (e.keyCode == 13) {
+            $(this).trigger("enterKey");
+        }
+    });
+
+    //remove an item by clicking the badge
+    $(document).on('click', '.badge', function () {
+        $(this).parent().remove();
+    });
+});
+</script>
+</html>
